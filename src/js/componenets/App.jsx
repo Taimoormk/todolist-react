@@ -5,9 +5,12 @@ class App extends Component {
 
   constructor() {
     super();
+    this.changeHandler = this.changeHandler.bind(this);
+    this.addListItem = this.addListItem.bind(this);
+    this.removeListItem = this.removeListItem.bind(this);
   }
 
-  changeHandler(e) {
+changeHandler(e) {
     let { inputValue, inputValueAction } = this.props;
     inputValue = e.target.value;
     inputValueAction(inputValue);
@@ -26,7 +29,27 @@ class App extends Component {
     inputValueAction('');
   }
 
+  removeListItem(id) {
+    let { listItems, removeListItemAction } = this.props;
+    listItems = listItems.filter((item)=>{
+      return item.id !== id;
+    });
+    removeListItemAction(listItems);
+  }
+
   render() {
+    let { listItems, inputValue } = this.props;
+    const  listItemComponents = listItems.map((item, index)=> {
+      return (
+        <ListItem 
+          // removeListItem={this.removeListItem}
+          listItem={item}
+          key={index}
+          index={index}
+        />
+      );
+    });
+
     return (
       <div className="container app">
         <h1>ToDo List with React-Redux framework</h1>
@@ -73,8 +96,9 @@ App.PropTypes = {
 
 function mapStateToProps(state) {
   return {
-    key: null
+    listItems: state.list.listItems,
+    inputValue: state.list.inputValue
   };
 };
 
-export default connect(mapStateToProps, {})(App);
+export default connect(mapStateToProps, {addListItemAction, removeListItemAction, inputValueAction})(App);
