@@ -1,4 +1,4 @@
-import  { ADD_ITEM, DEL_ITEM, INP_VAL, COM_ITEM } from '../constants';
+import  { ADD_ITEM, DEL_ITEM, INP_VAL, COM_ITEM, SHIFT_UP, SHIFT_DOWN } from '../constants';
 
 const initial = {
   inputValue: "",
@@ -14,6 +14,11 @@ export default function(state=initial, action) {
     case INP_VAL:
       return {...state, inputValue: action.payload}
     case COM_ITEM:
+      return {...state, listItems: action.payload}
+    case SHIFT_UP:
+    console.log('fired');
+      return {...state, listItems: action.payload}
+    case SHIFT_DOWN:
       return {...state, listItems: action.payload}
   }
   return state;

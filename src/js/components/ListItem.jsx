@@ -8,7 +8,7 @@ class ListItem extends Component {
   }
 
   render() {
-    let { listItem, index, id, removeListItem, completeListItem } = this.props;
+    let { listItem, index, id, removeListItem, completeListItem, shiftUpItem, shiftDownItem } = this.props;
     return (
       <tr>
         <td>{index}</td>
@@ -20,10 +20,18 @@ class ListItem extends Component {
           >
             Completed
           </button>
-          <button type="button" className="btn btn-primary">
+          <button 
+            type="button" 
+            className="btn btn-primary"
+            onClick={()=>shiftUpItem(index)}
+          >
             Shift <span className="glypicon glyphicon-menu-up"></span>
           </button>
-          <button type="button" className="btn btn-primary">
+          <button 
+            type="button" 
+            className="btn btn-primary"
+            onClick={()=>shiftDownItem(index)}
+          >
             Shift <span className="glypicon glyphicon-menu-down"></span>
           </button>
           <button

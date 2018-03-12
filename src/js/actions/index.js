@@ -1,4 +1,4 @@
-import { ADD_ITEM, DEL_ITEM, INP_VAL, COM_ITEM } from '../constants';
+import { ADD_ITEM, DEL_ITEM, INP_VAL, COM_ITEM, SHIFT_UP, SHIFT_DOWN } from '../constants';
 
 export function addListItemAction(listItems) {
   return {
@@ -24,6 +24,20 @@ export function inputValueAction(value) {
 export function completeListItemAction(listItems) {
   return {
     type: COM_ITEM,
+    payload: listItems
+  };
+};
+
+export function shiftUpItemAction(listItems) {
+  return {
+    type: SHIFT_UP,
+    payload: listItems
+  };
+};
+
+export function shiftDownItemAction(listItems) {
+  return {
+    type: SHIFT_DOWN,
     payload: listItems
   };
 };

@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import { addListItemAction, removeListItemAction, inputValueAction, completeListItemAction } from '../actions'
+import { 
+  addListItemAction, 
+  removeListItemAction, 
+  inputValueAction, 
+  completeListItemAction,
+  shiftUpItemAction,
+  shiftDownItemAction
+} from '../actions'
 import ListItem from './ListItem';
 
 class App extends Component {
@@ -12,6 +19,8 @@ class App extends Component {
     this.addListItem = this.addListItem.bind(this);
     this.removeListItem = this.removeListItem.bind(this);
     this.completeListItem = this.completeListItem.bind(this);
+    this.shiftUpItem = this.shiftUpItem.bind(this);
+    this.shiftDownItem = this.shiftDownItem.bind(this);
   }
 
   changeHandler(e) {
@@ -48,6 +57,30 @@ class App extends Component {
     completeListItemAction(listItems);
   }
 
+  shiftUpItem(index) {
+    let { listItems, shiftUpItemAction } = this.props;
+    if(!index) {
+      return null;
+    } else {
+      listItems = [...listItems];
+      var temp = listItems.splice(index, 1);
+      listItems.splice(index-1, 0, temp[0]);
+    }
+    shiftUpItemAction(listItems);
+  }
+
+  shiftDownItem(index) {
+    let { listItems, shiftDownItemAction } = this.props;
+    if(!index) {
+      return null;
+    } else {
+      listItems = [...listItems];
+      var temp = listItems.splice(index, 1);
+      listItems.splice(index-1, 0, temp[0]);
+    }
+    shiftDownItemAction(listItems);
+  }
+
   render() {
     let { listItems, inputValue } = this.props;
     const listItemComponents = listItems.map((item, index) => {
@@ -55,6 +88,8 @@ class App extends Component {
         <ListItem
           completeListItem={this.completeListItem}
           removeListItem={this.removeListItem}
+          shiftUpItem={this.shiftUpItem}
+          shiftDownItem={this.shiftDownItem}
           listItem={item}
           key={index}
           index={index}
@@ -114,4 +149,11 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, { addListItemAction, removeListItemAction, inputValueAction, completeListItemAction })(App);
+export default connect(mapStateToProps, { 
+  addListItemAction, 
+  removeListItemAction, 
+  inputValueAction, 
+  completeListItemAction,
+  shiftUpItemAction,
+  shiftDownItemAction 
+})(App);
