@@ -33,7 +33,7 @@ class ListItem extends Component {
   }
 }
 
-ListItem.PropTypes = {
+ListItem.propTypes = {
 }
 
 export default ListItem;

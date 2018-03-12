@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+import { addListItemAction, removeListItemAction, inputValueAction } from '../actions'
+import ListItem from './ListItem';
 
 class App extends Component {
 
@@ -42,7 +45,7 @@ changeHandler(e) {
     const  listItemComponents = listItems.map((item, index)=> {
       return (
         <ListItem 
-          // removeListItem={this.removeListItem}
+          removeListItem={this.removeListItem}
           listItem={item}
           key={index}
           index={index}
@@ -91,7 +94,7 @@ changeHandler(e) {
   }
 }
 
-App.PropTypes = {
+App.propTypes = {
 }
 
 function mapStateToProps(state) {
