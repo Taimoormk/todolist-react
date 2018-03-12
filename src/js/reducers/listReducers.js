@@ -1,4 +1,4 @@
-import  { ADD_ITEM, DEL_ITEM, INP_VAL } from '../constants';
+import  { ADD_ITEM, DEL_ITEM, INP_VAL, COM_ITEM } from '../constants';
 
 const initial = {
   inputValue: "",
@@ -13,6 +13,8 @@ export default function(state=initial, action) {
       return {...state, listItems: action.payload}
     case INP_VAL:
       return {...state, inputValue: action.payload}
+    case COM_ITEM:
+      return {...state, listItems: action.payload}
   }
   return state;
 }

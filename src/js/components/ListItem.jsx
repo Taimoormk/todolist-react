@@ -8,13 +8,18 @@ class ListItem extends Component {
   }
 
   render() {
-    let { listItem, index, id, removeListItem } = this.props;
+    let { listItem, index, id, removeListItem, completeListItem } = this.props;
     return (
       <tr>
         <td>{index}</td>
         <td className={listItem.completed ? "completed" : ""}>{listItem.itemValue}</td>
         <td>
-          <button className="btn btn-success">Completed</button>
+          <button 
+            className="btn btn-success"
+            onClick={()=>completeListItem(index)}
+          >
+            Completed
+          </button>
           <button type="button" className="btn btn-primary">
             Shift <span className="glypicon glyphicon-menu-up"></span>
           </button>

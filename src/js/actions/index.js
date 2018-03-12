@@ -1,4 +1,4 @@
-import { ADD_ITEM, DEL_ITEM, INP_VAL } from '../constants';
+import { ADD_ITEM, DEL_ITEM, INP_VAL, COM_ITEM } from '../constants';
 
 export function addListItemAction(listItems) {
   return {
@@ -18,5 +18,12 @@ export function inputValueAction(value) {
   return {
     type: INP_VAL,
     payload: value
+  };
+};
+
+export function completeListItemAction(listItems) {
+  return {
+    type: COM_ITEM,
+    payload: listItems
   };
 };

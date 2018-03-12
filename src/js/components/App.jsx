@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import { addListItemAction, removeListItemAction, inputValueAction } from '../actions'
+import { addListItemAction, removeListItemAction, inputValueAction, completeListItemAction } from '../actions'
 import ListItem from './ListItem';
 
 class App extends Component {
@@ -11,9 +11,10 @@ class App extends Component {
     this.changeHandler = this.changeHandler.bind(this);
     this.addListItem = this.addListItem.bind(this);
     this.removeListItem = this.removeListItem.bind(this);
+    this.completeListItem = this.completeListItem.bind(this);
   }
 
-changeHandler(e) {
+  changeHandler(e) {
     let { inputValue, inputValueAction } = this.props;
     inputValue = e.target.value;
     inputValueAction(inputValue);
@@ -34,17 +35,25 @@ changeHandler(e) {
 
   removeListItem(id) {
     let { listItems, removeListItemAction } = this.props;
-    listItems = listItems.filter((item)=>{
+    listItems = listItems.filter((item) => {
       return item.id !== id;
     });
     removeListItemAction(listItems);
   }
 
+  completeListItem(index) {
+    let { listItems, completeListItemAction } = this.props;
+    listItems[index].completed = !listItems[index].completed;
+    listItems = [...listItems];
+    completeListItemAction(listItems);
+  }
+
   render() {
     let { listItems, inputValue } = this.props;
-    const  listItemComponents = listItems.map((item, index)=> {
+    const listItemComponents = listItems.map((item, index) => {
       return (
-        <ListItem 
+        <ListItem
+          completeListItem={this.completeListItem}
           removeListItem={this.removeListItem}
           listItem={item}
           key={index}
@@ -52,6 +61,7 @@ changeHandler(e) {
         />
       );
     });
+    console.log('listItems', listItems);
 
     return (
       <div className="container app">
@@ -60,7 +70,7 @@ changeHandler(e) {
         <form>
           <div className="form-group">
             <label htmlFor="list-item-input">New ToDo Item</label>
-            <input 
+            <input
               type="text"
               className="form-control"
               id="list-item-input"
@@ -104,4 +114,4 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, {addListItemAction, removeListItemAction, inputValueAction})(App);
+export default connect(mapStateToProps, { addListItemAction, removeListItemAction, inputValueAction, completeListItemAction })(App);
