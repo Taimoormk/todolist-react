@@ -96,7 +96,6 @@ class App extends Component {
         />
       );
     });
-    console.log('listItems', listItems);
 
     return (
       <div className="container app">

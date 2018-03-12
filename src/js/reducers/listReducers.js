@@ -16,7 +16,6 @@ export default function(state=initial, action) {
     case COM_ITEM:
       return {...state, listItems: action.payload}
     case SHIFT_UP:
-    console.log('fired');
       return {...state, listItems: action.payload}
     case SHIFT_DOWN:
       return {...state, listItems: action.payload}
