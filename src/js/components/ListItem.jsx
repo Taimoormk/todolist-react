@@ -47,6 +47,13 @@ class ListItem extends Component {
 }
 
 ListItem.propTypes = {
+  listItem: PropTypes.element.isRequired,
+  index: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+  removeListItem: PropTypes.func.isRequired,
+  completeListItem: PropTypes.func.isRequired,
+  shiftUpItem: PropTypes.func.isRequired,
+  shiftDownItem: PropTypes.func.isRequired
 }
 
 export default ListItem;

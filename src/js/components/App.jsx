@@ -139,6 +139,14 @@ class App extends Component {
 }
 
 App.propTypes = {
+  addListItemAction: PropTypes.func.isRequired,
+  removeListItemAction: PropTypes.func.isRequired,
+  inputValueAction: PropTypes.func.isRequired,
+  completeListItemAction: PropTypes.func.isRequired,
+  shiftUpItemAction: PropTypes.func.isRequired,
+  shiftDownItemAction: PropTypes.func.isRequired,
+  listItems: PropTypes.array.isRequired,
+  inputValue: PropTypes.string.isRequired,
 }
 
 function mapStateToProps(state) {
